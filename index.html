@@ -44,7 +44,7 @@
                         link.innerHTML = "Shorten on Twitter";
                     }
                     e.returnValue = false;
-                    e.preventDefault();
+                    if(e.preventDefault) {e.preventDefault();}
                     return false;
                 });
             })()
