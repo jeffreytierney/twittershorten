@@ -2,18 +2,39 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+            * { margin:0; padding:0; }
+            body { font-family: Arial, Helvetica, sans-serif; text-align: center;}
+            a {text-decoration: none;}
+            #container { margin: 0 auto; width: 80%; min-width: 400px; max-width: 1200px;}
+            h1 { padding: 30px 0;}
+            #bookmarkletlink { margin: 20px 0;}
+            form p { margin: 20px 0; padding-top: 40px; border-top: 1px dashed #999;}
+            fieldset { border-width: 0; }
+            label { width: 80%; min-width: 400px; height: 40px; line-height: 40px; display: block; margin: 0 auto; clear: both;}
+            label strong { width: 37%; padding-right: 3%; float: left; text-align: right;}
+            label input { width: 45%; float: left; border: 1px solid #000; margin-top: 6px; height: 26px; font-size: 16px;}
+            #submit { margin-top: 15px; border: 1px solid #DCDCDC; background-color: #454545; color: #FFF; font-size: 16px; padding: 10px; clear: both;}
+            
+            #bookmarkletlink { display: inline-block; line-height: 30px; font-size: 16px; padding: 0 10px; background-color: #123456; color: #FFF;}
+            
+            
+        </style>
     </head>
     <body>
-        <h1>Use this bookmarklet to shorten links in New Twitter</h1>
-        Drag Me to your bookmarks bar and click me when you have links in your #newtwitter textboxes that you want to shorten -&gt; <a id="bookmarkletlink" href="javascript:(function(){if(typeof window.BITLY=='undefined'){javascript:var%20e=document.createElement('script');e.setAttribute('id','bitly_twitter_shorten_script');e.setAttribute('language','javascript');e.setAttribute('src','http://localhost/twittershorten/twittershorten.js');document.body.appendChild(e);}else {window.BITLY.shorten();}})();void(0);">Shorten on Twitter</a>
-        <form id="customize">
-            <fieldset>
-                <legend>If you have your own <a href="http://bit.ly">bit.ly</a> username / API key, enter it here to create your custom version of the bookmarklet</legend>
-                <label for="user">bit.ly username:<input type="text" id="user" value="" /></label>
-                <label for="key">bit.ly api key:<input type="text" id="key" value="" /></label>
-                <input type="submit" value="Customize" />
-            </fieldset>
-        </form>
+        <div id="container">
+            <h1>Use this bookmarklet to shorten links in New Twitter</h1>
+            <p>Drag this button to your bookmarks bar and click me when you have links in your #newtwitter tweets that you want to shorten:</p>
+            <a id="bookmarkletlink" href="javascript:(function(){if(typeof window.BITLY=='undefined'){javascript:var%20e=document.createElement('script');e.setAttribute('id','bitly_twitter_shorten_script');e.setAttribute('language','javascript');e.setAttribute('src','http://localhost/twittershorten/twittershorten.js');document.body.appendChild(e);}else {window.BITLY.shorten();}})();void(0);">Shorten on Twitter</a>
+            <form id="customize">
+                <fieldset>
+                    <p>If you have your own <a href="http://bit.ly">bit.ly</a> username / API key, enter it here to create your custom version of the bookmarklet</p>
+                    <label for="user"><strong>bit.ly username:</strong><input type="text" id="user" value="" /></label>
+                    <label for="key"><strong>bit.ly api key:</strong><input type="text" id="key" value="" /></label>
+                    <input id="submit" type="submit" value="Customize" />
+                </fieldset>
+            </form>
+        </div>
         <script type="text/javascript">
             (function() {
                 var query_string = "";
