@@ -5,6 +5,49 @@
     </head>
     <body>
         <h1>Use this bookmarklet to shorten links in New Twitter</h1>
-        Drag Me to your bookmarks bar and click me when you have links in your #newtwitter textboxes that you want to shorten -&gt; <a href="javascript:(function(){if(typeof window.BITLY=='undefined'){javascript:var%20e=document.createElement('script');e.setAttribute('language','javascript');e.setAttribute('src','http://jeffreytierney.com/twittershorten/twittershorten.js');document.body.appendChild(e);}else {window.BITLY.shorten();}})();void(0);">Shorten on Twitter</a>
+        Drag Me to your bookmarks bar and click me when you have links in your #newtwitter textboxes that you want to shorten -&gt; <a id="bookmarkletlink" href="javascript:(function(){if(typeof window.BITLY=='undefined'){javascript:var%20e=document.createElement('script');e.setAttribute('id','bitly_twitter_shorten_script');e.setAttribute('language','javascript');e.setAttribute('src','http://localhost/twittershorten/twittershorten.js');document.body.appendChild(e);}else {window.BITLY.shorten();}})();void(0);">Shorten on Twitter</a>
+        <form id="customize">
+            <fieldset>
+                <legend>If you have your own <a href="http://bit.ly">bit.ly</a> username / API key, enter it here to create your custom version of the bookmarklet</legend>
+                <label for="user">bit.ly username:<input type="text" id="user" value="" /></label>
+                <label for="key">bit.ly api key:<input type="text" id="key" value="" /></label>
+                <input type="submit" value="Customize" />
+            </fieldset>
+        </form>
+        <script type="text/javascript">
+            (function() {
+                var query_string = "";
+                var href = "";
+                var replace_query_string = "?user=:user&key=:key"
+                var replace_href = "javascript:(function(){if(typeof window.BITLY=='undefined'){javascript:var%20e=document.createElement('script');e.setAttribute('id','bitly_twitter_shorten_script');e.setAttribute('language','javascript');e.setAttribute('src','http://jeffreytierney.com/twittershorten/twittershorten.closure.simple.js:query_string');document.body.appendChild(e);}else {window.BITLY.shorten();}})();void(0);"
+
+                var addEvent = function( obj, type, fn ) {
+                  var _fn = fn;
+                  fn = function(e) {_fn.call(obj, e);}
+                  return obj.attachEvent ? obj.attachEvent( 'on'+type, fn ) : obj.addEventListener( type, fn, false );
+                }
+                addEvent(document.getElementById("customize"), "submit", function(e) {
+                    e = e || window.event;
+                    var link = document.getElementById("bookmarkletlink");
+                    var user = document.getElementById("user");
+                    var key = document.getElementById("key");
+                    if(user.value != "" && key.value != "") {
+                        query_string = replace_query_string.replace(":user", user.value).replace(":key", key.value);
+                        href = replace_href.replace(":query_string", query_string);
+                        link.setAttribute("href", href);
+                        link.innerHTML = "Shorten as " + user.value;
+                    }
+                    else {
+                        query_string = "";
+                        href = replace_href.replace(":query_string", query_string);
+                        link.setAttribute("href", href);
+                        link.innerHTML = "Shorten on Twitter";
+                    }
+                    e.returnValue = false;
+                    e.preventDefault();
+                    return false;
+                });
+            })()
+        </script>
     </body>
 </html>
